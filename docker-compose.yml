@@ -8,5 +8,5 @@ services:
     - "5432:5432"
   enviroment:
     POSTGRES_DB: task-management-api
-    POSTGRES_USER: 
-    POSTGRES_PASSWORD: 
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: 1234@Mudar

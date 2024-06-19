@@ -8,20 +8,21 @@ O objetivo deste curso é ensinar como criar uma aplicação back-end robusta ut
 
 - Criação de uma API para gerenciar tarefas e usuários.
 - Implementação de autenticação e autorização.
+- Configuração e uso do TypeORM com PostgreSQL.
 - Boas práticas de desenvolvimento com NestJS.
-
-Obs: no main, o código foi criado para armazenamento em memória e na develop foi feita a conexão com o Banco de Dados.
 
 ## Funcionalidades 🔍
 
 - **Gerenciamento de Tarefas**: Criação, leitura, atualização e exclusão de tarefas.
 - **Autenticação de Usuários**: Registro e login de usuários.
 - **Autorização**: Controle de acesso baseado em papéis (roles).
-- **Armazenamento em Memória**: Dados armazenados em estruturas de dados na memória.
+- **Conexão com Banco de Dados**: Configuração do TypeORM para integração com PostgreSQL.
 
 ## Tecnologias Utilizadas 👩‍💻
 
 - [NestJS](https://nestjs.com/)
+- [TypeORM](https://typeorm.io/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## Pré-requisitos ✅
 
@@ -29,6 +30,7 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 
 - Node.js (versão 14 ou superior)
 - NPM ou Yarn
+- PostgreSQL
 
 ## Instalação ⬇️
 
@@ -48,15 +50,32 @@ yarn install
 
 ## Configurando as variáveis de ambiente: ⚙️
 
-Crie um arquivo .env na raiz do projeto e adicione as seguintes configurações:
+1. Crie um arquivo .env na raiz do projeto e adicione as seguintes configurações:
 
 ```bash
 env
 
 JWT_SECRET=uma_chave_secreta
 
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=seu_usuario
+DB=sua_senha
+DB_NAME=nome_do_banco
+JWT_SECRET=uma_chave_secreta
+
 ```
 
+
+2. Execute as migrações do banco de dados:
+
+```bash
+
+npm run typeorm migration:run
+# ou
+yarn typeorm migration:run
+
+```
 
 ## Executando a Aplicação ▶️
 
@@ -71,4 +90,3 @@ yarn start:dev
 ```
 
 A aplicação estará disponível em http://localhost:3000.
-Você pode testar a API usando o [Insomnia](https://insomnia.rest/) ou qualquer outra ferramenta de sua escolha.
