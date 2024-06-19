@@ -52,6 +52,7 @@ yarn install
 
 1. Crie um arquivo .env na raiz do projeto e adicione as seguintes configurações:
 
+```bash
 env
 
 JWT_SECRET=uma_chave_secreta
@@ -62,6 +63,8 @@ DB_USERNAME=seu_usuario
 DB=sua_senha
 DB_NAME=nome_do_banco
 JWT_SECRET=uma_chave_secreta
+
+```
 
 
 2. Execute as migrações do banco de dados:
