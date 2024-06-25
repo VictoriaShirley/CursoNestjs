@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import { AuthResponseDto } from './auth.dto';
@@ -17,17 +17,21 @@ export class AuthService {
         this.jwtExpirationTimeInSeconds = +this.configService.get<number>('JWT_EXPIRATION_TIME');
     }
 
-    async signIn(username: string, password: string): Promise<AuthResponseDto> {
-        const foundUser = await this.usersService.findByUserName(username);
+    async signIn(email: string, password: string): Promise<AuthResponseDto> {
+        const foundUser = await this.usersService.findByEmail(email);
 
-        if(!foundUser || !bcryptCompareSync(password, foundUser.password)){
-            throw new UnauthorizedException();
-        }
+        if (!foundUser) {
+            throw new NotFoundException('User not found');
+          }
+      
+          if (!bcryptCompareSync(password, foundUser.password)) {
+            throw new UnauthorizedException('Invalid credentials');
+          }
 
-        const payload = {sub: foundUser.id, username : foundUser.username}
+        const payload = {sub: foundUser.id, email : foundUser.email}
 
         const token = this.jwtService.sign(payload);
 
-        return {token, expiresIn: this.jwtExpirationTimeInSeconds}
+        return {token, email, expiresIn: this.jwtExpirationTimeInSeconds}
     }
 }

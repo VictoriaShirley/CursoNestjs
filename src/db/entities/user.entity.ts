@@ -6,9 +6,12 @@ export class UserEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({type: 'varchar'})
+    @Column({type: 'varchar', nullable:true})
     username: string;
 
-    @Column({type: 'varchar', name: 'password_hash'})
+    @Column({type: 'varchar', nullable:true})
+    email: string;
+
+    @Column({type: 'varchar', name: 'password_hash', nullable:true})
     passwordHash: string;
 }
